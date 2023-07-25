@@ -1,6 +1,6 @@
 # Garamatic 9 Automation 
 
-This is a simple enough project that requires a bit of soldering. There are lots of videos and ideas on this kind of project. This one is specifically for my preference which is Tasmotized Sonoff hardware talking to Home Assistant contolling a Garamatic 9 door opener. But it will probably work with a whole range of Hormann and other similar openers.
+This is a simple enough project that requires a bit of soldering. There are lots of videos and ideas on this kind of project. This one is specifically for my preference which is Tasmotized Sonoff hardware talking to Home Assistant controlling a Garamatic 9 door opener. But it will probably work with a whole range of Hormann and other similar openers.
 
 What I used:
 1. Sonoff SV (e.g. https://www.ebay.co.uk/itm/163818100797)
