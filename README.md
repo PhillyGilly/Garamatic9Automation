@@ -9,11 +9,10 @@ What I used:
 4. Small ABS box (e.g. https://www.aliexpress.com/item/1005001526260365.html)
 5. A handful of male and female Dupont connectors
 
-
-
-
-
+This is a schematic of the Sonoff SV board:
 ![image](https://github.com/PhillyGilly/Garamatic9Automation/assets/56273663/60cfa5d0-a5a1-4cfb-afa1-2bd650da8bbd)
+
+
 
 My config:
 Module type Sonoff SV (0)
