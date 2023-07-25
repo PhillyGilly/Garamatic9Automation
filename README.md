@@ -8,16 +8,19 @@ What I used:
 3. Approx 4m of R/B/Bl/Y four core alarm cable
 4. Small ABS box (e.g. https://www.aliexpress.com/item/1005001526260365.html)
 5. A handful of male and female Dupont connectors
+6. An old USB lead mofified to provide a 5V power supply
 
 This is a schematic of the Sonoff SV board:
 ![image](https://github.com/PhillyGilly/Garamatic9Automation/assets/56273663/60cfa5d0-a5a1-4cfb-afa1-2bd650da8bbd)
 
+The first task is to solder male pins in the switch out connectors and to solder a jumper across the switch in.
+(I also solder male pins into the four connectors for flashing). Finally break off the two reistors either side of the xxxxx.
+Now you can flash Tasmota onto the SV.  I used a FTDI232 set at 3.3v. After the flash is successful unplug the FTID which will power off.
 
+Next step is to power up using the 5V USB power lead and connect the SV to your wifi network. Once on-line open up a web browser to configure the SV. Follow through all the normal steps including the MQTT set up. Configure Module as type Sonoff SV (0).  I set all GPIOs as none except GPIO14 which has to be set as switch 1.
+![image](https://github.com/PhillyGilly/Garamatic9Automation/assets/56273663/e1128ca1-a8f9-46cb-81ad-13bfbbd4374c)
 
-My config:
-Module type Sonoff SV (0)
-GPIO all none
-GPIO14 switch 1 ??
+I also entered the following configuration by the Console interface
 
 Backlog TimeZone 99; TimeDST 0,0,3,1,1,60; TimeSTD 0,0,10,1,2,0; Time
 SetOption56 1
@@ -28,6 +31,11 @@ Switchmode1 1
 Switchmode1 15
 PowerOnState1 0
 PulseTime1 10
+
+Go over to Home Assistant.  I like to to keep my configuration.yaml file compact, so I put my extra text in "included" files with 
+>cover: !include cover.yaml
+>mqtt: !include mqtt.yaml
+So create and save the following files in HA /config folder
 
 cover.yaml
     garage_door_left:
@@ -63,6 +71,12 @@ binary_sensor:
     value_template: "{{value_json.Switch1}}"
     icon: "mdi:garage-variant"
 switch:
+
+
+
+
+
+Back to the soldering iron and solder/crimp female dupont connectors onto the red/yellow of the magnetic contact switch.  Connect it to GPIO14 and test .
 
 
 
