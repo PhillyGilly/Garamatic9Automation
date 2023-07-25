@@ -118,11 +118,14 @@ THe four core cable has to be run along the top of the motor track. This will be
 Unplug the motor unit and remove the cover. There is a connection shown as 24V but this cannot be used as it is only live when motor is powered on, so instead get power for the SV from the adjacent terminals and use the SV 1 second pulse out put to switch the motor on, thus:
 ![image](https://github.com/PhillyGilly/Garamatic9Automation/assets/56273663/80e6e218-3657-4db0-88ea-fe7885d8749b)
 
-The numbers refer to diagrams in the <a href="https://www.garador.co.uk/media/files/fitting-instructions/garamatic-9.pdf"> Garamatic 9 Manual</a>.  You should end up with something like this.
+The numbers refer to diagrams in the <a href="https://www.garador.co.uk/media/files/fitting-instructions/garamatic-9.pdf"> Garamatic 9 Manual</a>.
 
-![2023-07-25 12 35 46x](https://github.com/PhillyGilly/Garamatic9Automation/assets/56273663/549e0157-9cd9-45e9-8ed3-ea32f5dcb62e)
+You should end up with something like this.
+
+![2023-07-25 12 35 46x](https://github.com/PhillyGilly/Garamatic9Automation/assets/56273663/fed90791-c61b-4542-bea2-669d2d4e83a3)
 
 That's it really. My biggest challenge was getting reliable wifi in my garage but it's all fine now.
+
 ![image](https://github.com/PhillyGilly/Garamatic9Automation/assets/56273663/df1b7456-3a14-4253-b02d-e36cab69d846)
 
 Good luck!
