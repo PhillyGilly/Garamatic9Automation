@@ -9,7 +9,7 @@ What I used:
 4. Small ABS box (e.g. https://www.aliexpress.com/item/1005001526260365.html)
 5. A handful of male and female Dupont connectors
 6. Some sticky pads and tie-wraps.
-7. An old USB lead mofified to provide a 5V power supply
+7. An old USB lead modified to provide a 5V power supply
 
 This is a schematic of the Sonoff SV board:
 
@@ -115,10 +115,12 @@ Next you can install the box and magnetic contact switch. You only need to worry
 
 THe four core cable has to be run along the top of the motor track. This will be very dirty so clean it before fastening the cable with sticky pads and cable ties.
 
-Unplug the motor unit and remove the cover. There is a connection shown as 24V but this cannot be used as it is only live when motor is powered on, so instad get power for the SV from the adjacent terminals and use the SV 1 second pulse out put to switch the motor on, thus:
+Unplug the motor unit and remove the cover. There is a connection shown as 24V but this cannot be used as it is only live when motor is powered on, so instead get power for the SV from the adjacent terminals and use the SV 1 second pulse out put to switch the motor on, thus:
 ![image](https://github.com/PhillyGilly/Garamatic9Automation/assets/56273663/80e6e218-3657-4db0-88ea-fe7885d8749b)
 
-The numbers refer to diagrams in the <a href="https://www.garador.co.uk/media/files/fitting-instructions/garamatic-9.pdf"> Garamatic 9 Manual</a>.
+The numbers refer to diagrams in the <a href="https://www.garador.co.uk/media/files/fitting-instructions/garamatic-9.pdf"> Garamatic 9 Manual</a>.  You should end up with something like this.
+
+![2023-07-25 12 35 46x](https://github.com/PhillyGilly/Garamatic9Automation/assets/56273663/549e0157-9cd9-45e9-8ed3-ea32f5dcb62e)
 
 That's it really. My biggest challenge was getting reliable wifi in my garage but it's all fine now.
 ![image](https://github.com/PhillyGilly/Garamatic9Automation/assets/56273663/df1b7456-3a14-4253-b02d-e36cab69d846)
