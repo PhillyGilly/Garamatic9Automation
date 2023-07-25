@@ -1,6 +1,18 @@
-# Garamatic 9 Automation
+# Garamatic 9 Automation 
 
-This is a simple enough project that requires a bit of soldering.
+This is a simple enough project that requires a bit of soldering. There are lots of videos and ideas on this kind of project. This one is specifically for my preference which is Tasmotized Sonoff hardware talking to Home Assistant contolling a Garamatic 9 door opener. But it will probably work with a whole range of Hormann and other similar openers.
+
+What I used:
+1. Sonoff SV (e.g. https://www.ebay.co.uk/itm/163818100797)
+2. Magnetic contact switch (e.g. https://www.ebay.co.uk/itm/293305357069)
+3. Approx 4m of R/B/Bl/Y four core alarm cable
+4. Small ABS box (e.g. https://www.aliexpress.com/item/1005001526260365.html)
+5. A handful of male and female Dupont connectors
+
+
+
+
+
 ![image](https://github.com/PhillyGilly/Garamatic9Automation/assets/56273663/60cfa5d0-a5a1-4cfb-afa1-2bd650da8bbd)
 
 My config:
