@@ -8,45 +8,52 @@ What I used:
 3. Approx 4m of R/B/Bl/Y four core alarm cable
 4. Small ABS box (e.g. https://www.aliexpress.com/item/1005001526260365.html)
 5. A handful of male and female Dupont connectors
-6. An old USB lead mofified to provide a 5V power supply
+6. Some sticky pads and tie-wraps.
+7. An old USB lead mofified to provide a 5V power supply
 
 This is a schematic of the Sonoff SV board:
-![image](https://github.com/PhillyGilly/Garamatic9Automation/assets/56273663/60cfa5d0-a5a1-4cfb-afa1-2bd650da8bbd)
+
+![image](https://github.com/PhillyGilly/Garamatic9Automation/assets/56273663/09a391b0-f4af-4da9-adb9-28a977036b34)
 
 The first task is to solder male pins in the switch out connectors and to solder a jumper across the switch in.
-(I also solder male pins into the four connectors for flashing). Finally break off the two reistors either side of the xxxxx.
+(I also solder male pins into the four connectors for flashing). Finally break off the two resistors where shown.
 Now you can flash Tasmota onto the SV.  I used a FTDI232 set at 3.3v. After the flash is successful unplug the FTID which will power off.
 
-Next step is to power up using the 5V USB power lead and connect the SV to your wifi network. Once on-line open up a web browser to configure the SV. Follow through all the normal steps including the MQTT set up. Configure Module as type Sonoff SV (0).  I set all GPIOs as none except GPIO14 which has to be set as switch 1.
+Next step is to power up using the 5V USB power lead and connect the SV to your wifi network. Once on-line open up a web browser to configure the SV. Follow through all the normal steps including the MQTT set up. Configure Module as type Sonoff SV (0).  I set all GPIOs as none except GPIO14 which has to be set as Switch 1.
+
 ![image](https://github.com/PhillyGilly/Garamatic9Automation/assets/56273663/e1128ca1-a8f9-46cb-81ad-13bfbbd4374c)
 
 I also entered the following configuration by the Console interface
 
+```
 Backlog TimeZone 99; TimeDST 0,0,3,1,1,60; TimeSTD 0,0,10,1,2,0; Time
 SetOption56 1
 SetOption57 1
-
 Teleperiod 30
 Switchmode1 1
 Switchmode1 15
 PowerOnState1 0
 PulseTime1 10
+```
 
 Go over to Home Assistant.  I like to to keep my configuration.yaml file compact, so I put my extra text in "included" files with 
->cover: !include cover.yaml
->mqtt: !include mqtt.yaml
-So create and save the following files in HA /config folder
+```
+cover: !include cover.yaml
+mqtt: !include mqtt.yaml
+```
+So create and save the following files in HA /config folder paying careful attention to indents:
 
-cover.yaml
+**cover.yaml**
+```
     garage_door_left:
       unique_id: garagedoorleft
       friendly_name: "Garage Door Left"
       device_class: shade
       value_template: >-
         {% if states('binary_sensor.garage_door_left_state') == 'on' %}
-          closed
-        {% else %}
           open
+        {% else %}
+          closed
         {% endif %}
       open_cover:
         service: script.open_garage_door_left
@@ -58,8 +65,9 @@ cover.yaml
         {% else %}
           mdi:garage-open-variant
         {% endif %}
-
-mqtt.yaml
+```
+**mqtt.yaml**
+```
 binary_sensor:
   - name: "Garage Door left state"
     unique_id: garagedoorleftstate
@@ -71,21 +79,48 @@ binary_sensor:
     value_template: "{{value_json.Switch1}}"
     icon: "mdi:garage-variant"
 switch:
+  - name: Garage Door Left Switch
+    unique_id: garagedoorleftswitch
+    state_topic: "stat/SV2/POWER"
+    command_topic: "cmnd/SV2/POWER"
+    payload_on: "ON"
+    payload_off: "OFF"
+```
+**script.yaml**
+```
+garage_door_left_operate:
+  alias: 'Garage Door Left Operate'
+  sequence:
+  - service: switch.turn_on
+    data: {}
+    target:
+      entity_id: switch.garage_door_left_switch
+  mode: single
+  icon: mdi:garage-alert-variant
+```
 
+Normal processabout checking yaml and restarting HA apply. When HA is restarted add the new cover to a lovelace tab ready to test.
 
+Back to the soldering iron and solder/crimp female dupont connectors onto the red/yellow of the magnetic contact switch and onto the red/black/blue/yellow of one end of the four core cable.
 
+Connect the magnetic contact switch to GPIO14 and power up SV using the 5V USB lead.  You can now the test the operation by pretending to be the motor and make/break thr magnetic contact in response to red lights flashing on the SV.
 
+When you are OK, power down, connect the four core cable and fit everything in the box. You should have something that looks like this.
 
-Back to the soldering iron and solder/crimp female dupont connectors onto the red/yellow of the magnetic contact switch.  Connect it to GPIO14 and test .
+![2023-07-16 17 43 49x](https://github.com/PhillyGilly/Garamatic9Automation/assets/56273663/bd16d2fe-29dd-4a0b-bd67-7669949a43f3)
 
+Next you can install the box and magnetic contact switch. You only need to worry about getting the contact sensor to close when the door is fully closed as the default should be open/"unsafe". I found it easiest to position both sides of the sensor on sticky tape before drilling the metal to mount the cabled part on the frame, then partially opening the door to drill and mounting the oher part. One screw will suffice!
 
+![2023-07-24 17 00 19x](https://github.com/PhillyGilly/Garamatic9Automation/assets/56273663/098fa4fd-3d8b-4336-b9f3-d3958ec3d1ca)
 
+THe four core cable has to be run along the top of the motor track. This will be very dirty so clean it before fastening the cable with sticky pads and cable ties.
 
-![image](https://github.com/PhillyGilly/Garamatic9Automation/assets/56273663/1fae7832-9901-4714-ae9d-fc9e29d65ba7)
+Unplug the motor unit and remove the cover. There is a connection shown as 24V but this cannot be used as it is only live when motor is powered on, so instad get power for the SV from the adjacent terminals and use the SV 1 second pulse out put to switch the motor on, thus:
+![image](https://github.com/PhillyGilly/Garamatic9Automation/assets/56273663/80e6e218-3657-4db0-88ea-fe7885d8749b)
 
-![image](https://github.com/PhillyGilly/Garamatic9Automation/assets/56273663/1def7664-b5b5-4ef1-a0ab-75fc3b889812)
+The numbers refer to diagrams in the <a href="https://www.garador.co.uk/media/files/fitting-instructions/garamatic-9.pdf"> Garamatic 9 Manual</a>.
 
-![2023-07-24 17 00 19](https://github.com/PhillyGilly/Garamatic9Automation/assets/56273663/f7a34c53-6cc3-4958-99a1-c24e9b0c9967)
-![2023-07-16 17 43 49](https://github.com/PhillyGilly/Garamatic9Automation/assets/56273663/afae2f65-65d6-4334-9891-679b19f057cc)
-![2023-07-16 18 40 21](https://github.com/PhillyGilly/Garamatic9Automation/assets/56273663/2aa252b0-a159-4b33-8343-06fa8d5a45b2)
-![image](https://github.com/PhillyGilly/Garamatic9Automation/assets/56273663/2bdc5b0c-001d-4316-ae36-7f4ae3927d42)
+That's it really. My biggest challenge was getting reliable wifi in my garage but it's all fine now.
+![image](https://github.com/PhillyGilly/Garamatic9Automation/assets/56273663/df1b7456-3a14-4253-b02d-e36cab69d846)
+
+Good luck!
