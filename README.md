@@ -1,6 +1,7 @@
 # Garamatic 9 Automation
 
 This is a simple enough project that requires a bit of soldering.
+![image](https://github.com/PhillyGilly/Garamatic9Automation/assets/56273663/60cfa5d0-a5a1-4cfb-afa1-2bd650da8bbd)
 
 My config:
 Module type Sonoff SV (0)
