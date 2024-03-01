@@ -19,9 +19,9 @@ The first task is to solder male pins in the switch out (To motor) pads and to s
 (I also solder male pins into the four pads gnd, tx, rx, 3v3 for flashing). Finally break off the two resistors by inserting a small screwdriver between the resistor and the jumpers and gently twisting it where shown.
 Now you can flash Tasmota onto the SV.  I used <a href="https://github.com/tasmota/tasmotizer">Tasmotizer</a> and an FTDI232 set at 3.3v. After the flash is successful, unplug the FTID which will power off.
 
-Next step is to power up using the 5V USB power lead and connect the SV to your wifi network. Once on-line open up a web browser to configure the SV. Follow through all the normal steps including the MQTT set up. Configure Module as type Sonoff SV (0).  I set all GPIOs as none except GPIO14 which has to be set as Switch 1.
+Next step is to power up using the 5V USB power lead and connect the SV to your wifi network. Once on-line open up a web browser to configure the SV. Follow through all the normal steps including the MQTT set up. Configure Module as type Sonoff SV (3).  Then update GPIO as below. Note GPIO14 has to be set as Switch 1.
 
-![image](https://github.com/PhillyGilly/Garamatic9Automation/assets/56273663/e1128ca1-a8f9-46cb-81ad-13bfbbd4374c)
+![image](https://github.com/PhillyGilly/Garamatic9Automation/assets/56273663/e430bade-71a9-4284-b5ce-98d53bc4b8ef)
 
 I also entered the following configuration by the Console interface
 
@@ -71,7 +71,7 @@ So create and save the following files (or append to existing files) in HA /conf
 binary_sensor:
   - name: "Garage Door left state"
     unique_id: garagedoorleftstate
-    state_topic: "tele/SV2/SENSOR"
+    state_topic: "tele/GarageDoorLeft/SENSOR"
     payload_on: "ON"
     payload_off: "OFF"
     qos: 0
@@ -79,8 +79,8 @@ binary_sensor:
     value_template: "{{value_json.Switch1}}"
     icon: "mdi:garage-variant"
 switch:
-  - name: Garage Door Left Switch
-    unique_id: garagedoorleftswitch
+  - name: Garage Door Left Control
+    unique_id: garagedoorleftcontrol
     state_topic: "stat/SV2/POWER"
     command_topic: "cmnd/SV2/POWER"
     payload_on: "ON"
@@ -94,7 +94,7 @@ garage_door_left_operate:
   - service: switch.turn_on
     data: {}
     target:
-      entity_id: switch.garage_door_left_switch
+      entity_id: switch.garage_door_left_control
   mode: single
   icon: mdi:garage-alert-variant
 ```
