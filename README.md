@@ -21,7 +21,7 @@ Now you can flash Tasmota onto the SV.  I used <a href="https://github.com/tasmo
 
 Next step is to power up using the 5V USB power lead and connect the SV to your wifi network. Once on-line open up a web browser to configure the SV. Follow through all the normal steps including the MQTT set up. Configure Module as type Sonoff SV (3).  Then update GPIO as below. Note GPIO14 has to be set as Switch 1.
 
-![image](https://github.com/PhillyGilly/Garamatic9Automation/assets/56273663/e430bade-71a9-4284-b5ce-98d53bc4b8ef)
+![image](https://github.com/PhillyGilly/Garamatic9Automation/assets/56273663/15f81e85-b1b0-49bd-b383-d07d51a81539)
 
 I also entered the following configuration by the Console interface
 
