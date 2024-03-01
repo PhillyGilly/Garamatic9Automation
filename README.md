@@ -26,14 +26,15 @@ Next step is to power up using the 5V USB power lead and connect the SV to your 
 I also entered the following configuration by the Console interface
 
 ```
-Backlog TimeZone 99; TimeDST 0,0,3,1,1,60; TimeSTD 0,0,10,1,2,0; Time
-SetOption56 1
-SetOption57 1
-Teleperiod 30
-Switchmode1 1
-Switchmode1 15
-PowerOnState1 0
-PulseTime1 10
+Backlog
+    TimeZone 99; TimeDST 0,0,3,1,1,60; TimeSTD 0,0,10,1,2,0; Time;
+    SetOption56 1;
+    SetOption57 1;
+    Teleperiod 30;
+    Switchmode1 1;
+    Switchmode1 15;
+    PowerOnState1 0;
+    PulseTime1 10;
 ```
 
 Go over to Home Assistant.  I like to to keep my configuration.yaml file compact, so I put my extra text in "included" files with 
