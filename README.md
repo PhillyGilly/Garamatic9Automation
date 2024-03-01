@@ -79,14 +79,9 @@ binary_sensor:
     device_class: opening  
     value_template: "{{value_json.Switch1}}"
     icon: "mdi:garage-variant"
-switch:
-  - name: Garage Door Left Control
-    unique_id: garagedoorleftcontrol
-    state_topic: "stat/SV2/POWER"
-    command_topic: "cmnd/SV2/POWER"
-    payload_on: "ON"
-    payload_off: "OFF"
 ```
+To avoid (my) confusion between switch for state and switch for control, I added _"control" as a suffix to the name of the switch.gagage_door_left entity in HA. 
+
 **script.yaml**
 ```
 garage_door_left_operate:
