@@ -35,16 +35,30 @@ Backlog
     Switchmode2 15;
     PowerOnState1 0;
     PulseTime1 10;
-    SetOption19 1;
-```
+ ```
 
-Go over to Home Assistant.  I like to to keep my configuration.yaml file compact, so I put my extra text in "included" files with 
+Go over to Home Assistant.  
+
+I like to to keep my configuration.yaml file compact, so I put my extra text in "included" files with 
 ```
-cover: !include cover.yaml
 mqtt: !include mqtt.yaml
+cover: !include cover.yaml
 ```
 So create and save the following files (or append to existing files) in HA /config folder paying careful attention to indents:
 
+**mqtt.yaml**
+```
+binary_sensor:
+  - name: "Garage Door left state"
+    unique_id: garagedoorleftstate
+    state_topic: "tele/GarageDoorLeft/SENSOR"
+    payload_on: "ON"
+    payload_off: "OFF"
+    qos: 0
+    device_class: opening  
+    value_template: "{{value_json.Switch2}}"
+    icon: "mdi:garage-variant"
+```
 **cover.yaml**
 ```
     garage_door_left:
@@ -68,20 +82,6 @@ So create and save the following files (or append to existing files) in HA /conf
           mdi:garage-open-variant
         {% endif %}
 ```
-**mqtt.yaml**
-```
-binary_sensor:
-  - name: "Garage Door left state"
-    unique_id: garagedoorleftstate
-    state_topic: "tele/GarageDoorLeft/SENSOR"
-    payload_on: "ON"
-    payload_off: "OFF"
-    qos: 0
-    device_class: opening  
-    value_template: "{{value_json.Switch1}}"
-    icon: "mdi:garage-variant"
-```
-To avoid (my) confusion between switch for state and switch for control, I added _"control" as a suffix to the name of the switch.gagage_door_left entity in HA. 
 
 **script.yaml**
 ```
@@ -91,7 +91,7 @@ garage_door_left_operate:
   - service: switch.turn_on
     data: {}
     target:
-      entity_id: switch.garage_door_left_control
+      entity_id: switch.garage_door_left
   mode: single
   icon: mdi:garage-alert-variant
 ```
