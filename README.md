@@ -34,7 +34,7 @@ Backlog
     Switchmode2 1;
     Switchmode2 15;
     PowerOnState1 0;
-    PulseTime1 5; #set relay duration to 500mS
+    PulseTime1 20; #set relay duration to 2 seconds
  ```
 
 Go over to Home Assistant.  
